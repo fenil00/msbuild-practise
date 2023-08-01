@@ -15,7 +15,8 @@
 		<MySourcefile Include="*.txt"></MySourcefile>
 		<MyDestinationfile Include="bin\Debug\net6.0\"></MyDestinationfile>
 	</ItemGroup>
-	<Target Name="Message" AfterTargets="AfterBuild">
+
+	<Target Name="CopyTask" AfterTargets="AfterBuild">
 		<Message Text="Hey $(Name)!!!"></Message>
 		<Copy SourceFiles="@(MySourcefile)" DestinationFolder="@(MyDestinationfile)"></Copy>
 		<Delete  Files="F:\git\msbuild-practise\MsbuildPractise\bin\Debug\net6.0t\FileToCopy.txt">
@@ -23,5 +24,10 @@
 		</Delete>
 		<Message Text="Deleted files: '@(DeletedList)'"/>
 	</Target>
-
+	<Target Name="DeleteTask" AfterTargets="AfterBuild">
+		<Delete  Files="F:\git\msbuild-practise\MsbuildPractise\bin\Debug\net6.0t\FileToCopy.txt">
+			<Output TaskParameter="DeletedFiles" ItemName="DeletedList"/>
+		</Delete>
+		<Message Text="Deleted files: '@(DeletedList)'"/>
+	</Target>
 </Project>
