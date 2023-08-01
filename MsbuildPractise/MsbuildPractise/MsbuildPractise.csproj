@@ -1,10 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<OutputType>Exe</OutputType>
+	<TargetFramework>net6.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
+	
+	<PropertyGroup>
+		<Name>Simpson</Name>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<MySourcefile Include="*.txt"></MySourcefile>
+		<MyDestinationfile Include="bin\Debug\net6.0\"></MyDestinationfile>
+	</ItemGroup>
+	<Target Name="Message" AfterTargets="AfterBuild">
+		<Message Text="Hey $(Name)!!!"></Message>
+		<Copy SourceFiles="@(MySourcefile)" DestinationFolder="@(MyDestinationfile)"></Copy>
+		<Delete  Files="F:\git\msbuild-practise\MsbuildPractise\bin\Debug\net6.0t\FileToCopy.txt">
+			<Output TaskParameter="DeletedFiles" ItemName="DeletedList"/>
+		</Delete>
+		<Message Text="Deleted files: '@(DeletedList)'"/>
+	</Target>
 
 </Project>
