@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="MyInitialTarget;MyInitialTarget2" DefaultTargets="MyDefaultTarget">
 
   <PropertyGroup>
 	<OutputType>Exe</OutputType>
@@ -30,4 +30,16 @@
 		</Delete>
 		<Message Text="Deleted files: '@(DeletedList)'"/>
 	</Target>
+
+	<!--Initial target always runs first they are defined into Project property as InitialTargets="MyInitialTarget" -->
+	<Target Name="MyInitialTarget" >
+		<Message Text="This is inital target"></Message>
+	</Target>
+	<Target Name="MyInitialTarget2" >
+		<Message Text="This is inital target2"></Message>
+	</Target>
+	<Target Name="MyDefaultTarget" BeforeTargets="BeforeBuild">
+		<Message Text="This is my default target"></Message>
+	</Target>
 </Project>
+	
