@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="MyInitialTarget;MyInitialTarget2" DefaultTargets="MyDefaultTarget">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="MyInitialTarget;MyInitialTarget2">
 
   <PropertyGroup>
 	<OutputType>Exe</OutputType>
@@ -16,6 +16,7 @@
 		<MyDestinationfile Include="bin\Debug\net6.0\"></MyDestinationfile>
 	</ItemGroup>
 
+	<!--AfterTargets will not get called if you have specified "DefaultTargets" -->
 	<Target Name="CopyTask" AfterTargets="AfterBuild">
 		<Message Text="Hey $(Name)!!!"></Message>
 		<Copy SourceFiles="@(MySourcefile)" DestinationFolder="@(MyDestinationfile)"></Copy>
